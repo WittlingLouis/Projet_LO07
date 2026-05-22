@@ -39,6 +39,10 @@ switch ($action) {
         ControllerVehicule::$action();
         break;
     
+    case "superGlobales" :
+        ControllerCovoit::$action();
+        break;
+    
     default:
         $action = "covoitAccueil";
         ControllerCovoit::$action();

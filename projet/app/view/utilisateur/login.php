@@ -18,7 +18,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
       </div>
       <p/>
        <br/> 
-      <button class="btn btn-primary" type="submit">Connexion</button>
+      <button class="btn btn-success" type="submit">Connexion</button>
     </form>
     <p/>
   </div>

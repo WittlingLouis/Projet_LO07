@@ -12,7 +12,13 @@ class ControllerCovoit {
   require ($vue);
  }
 
- 
+ public static function superGlobales() {
+  include 'config.php';
+  $vue = $root . '/app/view/viewSuperGlobales.php';
+  if (DEBUG)
+   echo ("ControllerCovoit : superGlobales : vue = $vue");
+  require ($vue);
+ }
  
 }
 ?>

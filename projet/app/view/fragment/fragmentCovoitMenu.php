@@ -27,7 +27,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Examinateur</a>
           <ul class="dropdown-menu">
-             <li><a class="dropdown-item" href="router2.php?action=examinateurAfficherSuperGlobales">Afficher Superglobales</a></li>
+             <li><a class="dropdown-item" href="router2.php?action=superGlobales">Afficher Superglobales</a></li>
           </ul>
         </li>
 
