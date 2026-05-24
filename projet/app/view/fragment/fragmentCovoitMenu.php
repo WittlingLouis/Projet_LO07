@@ -61,7 +61,7 @@
               <?php elseif ($_SESSION['role'] == 'conducteur'): ?>
                   <li><a class="dropdown-item" href="router2.php?action=trajetListe">Mes trajets</a></li>
               <?php elseif ($_SESSION['role'] == 'passager'): ?>
-                  <li><a class="dropdown-item" href="router2.php?action=reservationListe">Mes réservations</a></li>
+                  <li><a class="dropdown-item" href="router2.php?action=reservReadAll">Liste des réservations</a></li>
               <?php endif; ?>
 
               
