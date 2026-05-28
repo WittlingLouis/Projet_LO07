@@ -26,7 +26,18 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
         <label class='w-25' for="id">Sélectionnez un véhicule : </label><select class="form-control" id='trajet_id' name='trajet_id' style="width: 500px">
             <?php
             foreach ($trajet as $t) {
-             printf("<option value='%d'>%s %s (%s)</option>", $t['id'], $t['marque'], $t['modele'], $t['immatriculation']);
+                $id     = $t->getId(); 
+                $marque = $t->getMarque();
+                $modele = $t->getModele();
+                $immat  = $t->getImmatriculation();
+
+                printf(
+                    "<option value='%d'>%s %s (%s)</option>", 
+                    $id, 
+                    htmlspecialchars($marque), 
+                    htmlspecialchars($modele), 
+                    htmlspecialchars($immat)
+                );
             }
             ?>
         </select>
@@ -37,11 +48,11 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
         <br/>
         
         <label class="w-25" for="date_trajet">Date du trajet</label>
-        <input type="number" class="form-control" id="date_trajet" name="date_trajet">
+        <input type="date" class="form-control" id="date_trajet" name="date_trajet">
         <br/>
         
         <label class="w-25" for="heure_trajet">Heure du trajet</label>
-        <input type="number" class="form-control" id="heure_trajet" name="heure_trajet">
+        <input type="time" class="form-control" id="heure_trajet" name="heure_trajet">
         <br/>
         
       </div>
