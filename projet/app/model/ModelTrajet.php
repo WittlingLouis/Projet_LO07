@@ -123,5 +123,21 @@ class ModelTrajet {
    return NULL;
   }
  }
+ 
+  public static function getAllTrajetsFromOneDriver($driver_id) {
+  try {
+   $database = Model::getInstance();
+   $query = "select id, ville_depart, ville_arrivee, date_depart, heure_depart, statut from trajet where id = :driver_id";
+   $statement = $database->prepare($query);
+   $statement->execute([
+       'driver_id' => $driver_id
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelTrajet");
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
 }
 ?>

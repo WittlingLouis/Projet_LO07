@@ -4,6 +4,7 @@ require_once('../controller/ControllerUtilisateur.php');
 require_once('../controller/ControllerVille.php');
 require_once('../controller/ControllerVehicule.php');
 require_once('../controller/ControllerReservation.php');
+require_once('../controller/ControllerTrajet.php');
 
 session_start();
 if (isset($_REQUEST['action'])) {
@@ -49,6 +50,12 @@ switch ($action) {
     case "reservCreate" :
     case "reservCreated" :    
         ControllerReservation::$action();
+        break;
+
+    case "trajetReadAllFromOneDriver" :
+    case "trajetCreate" :
+    case "trajetCreated" :    
+        ControllerTrajet::$action();
         break;
     
     default:

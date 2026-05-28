@@ -61,8 +61,8 @@
               <?php elseif ($_SESSION['role'] == 'conducteur'): ?>
                   <li><a class="dropdown-item" href="router2.php?action=vehiculeReadAllFromOneDriver">Liste de mes véhicules</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="router2.php?action=conducteurCreate">Liste de tous mes trajets (actifs et passifs</a></li>
-                  <li><a class="dropdown-item" href="router2.php?action=passagerCreate">Ajout d'un trajet</a></li>
+                  <li><a class="dropdown-item" href="router2.php?action=trajetReadAllFromOneDriver">Liste de tous mes trajets (actifs et passifs</a></li>
+                  <li><a class="dropdown-item" href="router2.php?action=trajetCreate">Ajout d'un trajet</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="router2.php?action=villeReadAll">Liste des passagers de l'un de mes trajets actifs</a></li>
                   <li><a class="dropdown-item" href="router2.php?action=villeCreate">Cloturer l'un de mes trajets actifs</a></li>
