@@ -99,6 +99,57 @@ class ModelReservation {
   }
  }
 
+ public static function insertTenRandomReserv() {
+  try {
+   $database = Model::getInstance();
+   $queryTrajet = "select id from trajet where statut = 'actif' order by RAND() LIMIT 1";
+   $queryPassager = "select id from utilisateur where role = 'passager' order by RAND() LIMIT 1"; 
+   for ($i = 0; $i < 10; $i++){
+       $statement = $database->query($queryTrajet);
+       $traj = $statement->fetch();
+       $trajet_id = $traj[0];
+       
+       $statement = $database->query($queryPassager);
+       $pass= $statement->fetch();
+       $passager_id = $pass[0];
+       
+       $sqlCheckDouble = "select count(*) from reservation where trajet_id = :t_id and passager_id = :p_id";
+       $statementCheck = $database->prepare($sqlCheckDouble);
+       $statementCheck->execute(['t_id' => $trajet_id, 'p_id' => $passager_id]);
+       $existe = $statementCheck->fetchColumn();
 
+       if ($existe > 0) {
+        continue; 
+       }
+       
+       $queryCkeck = "select max(id) from reservation";
+       $statementCheckId = $database->query($queryCkeck);
+       $tuple = $statementCheckId->fetch();
+       $id = $tuple['0'];
+       $id++;
+       
+       $sqlInsert = "insert into reservation (id, trajet_id, passager_id) values (:id, :trajet_id, :passager_id)";
+       $statement = $database->prepare($sqlInsert);
+       $statement->execute([
+          'id' => $id,
+          'trajet_id' => $trajet_id,
+          'passager_id' => $passager_id
+       ]);
+   }
+   
+   $select = "select r.id, u.nom, u.prenom, v1.nom as depart, v2.nom as arrivee, t.date_depart, t.heure_depart"
+           . " from reservation r, utilisateur u, ville v1, ville v2, trajet t"
+           . " where r.passager_id = u.id and t.ville_depart = v1.id"
+           . " and t.ville_arrivee = v2.id and r.trajet_id = t.id"
+           . " order by r.id desc limit 10";
+   $statement = $database->query($select);
+   $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
 }
 ?>

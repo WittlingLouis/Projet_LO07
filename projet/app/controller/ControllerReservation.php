@@ -35,6 +35,19 @@ class ControllerReservation {
   $vue = $root . '/app/view/reservation/viewInserted.php';
   require ($vue);
  }
+ 
+ public static function tenReservCreate() {
+  include 'config.php';
+  $vue = $root . '/app/view/reservation/viewInsertRand.php';
+  require ($vue);
+ }
+
+ public static function tenReservCreated() {
+  $results = ModelReservation::insertTenRandomReserv();
+  include 'config.php';
+  $vue = $root . '/app/view/reservation/viewInsertedRand.php';
+  require ($vue);
+ }
 }
 ?>
 <!-- ----- fin ControllerProducteur -->
