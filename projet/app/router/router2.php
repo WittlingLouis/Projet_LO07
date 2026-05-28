@@ -35,6 +35,7 @@ switch ($action) {
         break;
     
     case "vehiculeReadAll" :
+    case "vehiculeReadAllFromOneDriver" :
     case "vehiculeCreate" : 
     case "vehiculeCreated" :  
         ControllerVehicule::$action();

@@ -111,6 +111,22 @@ class ModelVehicule {
   }
  }
  
+  public static function getAllVehiculesFromOneDriver($driver_id) {
+  try {
+   $database = Model::getInstance();
+   $query = "select marque, modele, annee, immatriculation from vehicule where proprietaire_id = :driver_id";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'driver_id' => $driver_id,
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelVehicule");
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
  public function getProprietaireIdentite(){
   return $this->prenom . " " . $this->nom;
  }

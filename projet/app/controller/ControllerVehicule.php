@@ -17,6 +17,16 @@ class ControllerVehicule {
   require ($vue);
  }
  
+  public static function vehiculeReadAllFromOneDriver() {
+  $driver_id = $_SESSION['login_id'];
+  $results = ModelVehicule::getAllVehiculesFromOneDriver($driver_id);
+  include 'config.php';
+  $vue = $root . '/app/view/vehicule/viewAllFromOneDriver.php';
+  if (DEBUG)
+   echo ("ControllerVehicule : vehiculeReadAllFromOneDriver : vue = $vue");
+  require ($vue);
+ }
+ 
  public static function vehiculeCreate() {
   $listeConducteurs = ModelUtilisateur::getAllConducteurs();
   include 'config.php';
