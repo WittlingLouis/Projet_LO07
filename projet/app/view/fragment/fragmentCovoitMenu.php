@@ -68,6 +68,7 @@
                   <li><a class="dropdown-item" href="router2.php?action=villeCreate">Cloturer l'un de mes trajets actifs</a></li>
               <?php elseif ($_SESSION['role'] == 'passager'): ?>
                   <li><a class="dropdown-item" href="router2.php?action=reservReadAll">Liste des réservations</a></li>
+                  <li><a class="dropdown-item" href="router2.php?action=reservCreate">Effectuer une réservation</a></li>
               <?php endif; ?>
               
             </ul>

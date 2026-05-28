@@ -46,6 +46,8 @@ switch ($action) {
         break;
     
     case "reservReadAll" :
+    case "reservCreate" :
+    case "reservCreated" :    
         ControllerReservation::$action();
         break;
     

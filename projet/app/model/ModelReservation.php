@@ -76,7 +76,28 @@ class ModelReservation {
   }
  }
  
- 
+ public static function insert($passager_id, $trajet_id) {
+  try {
+   $database = Model::getInstance();
+   $queryCkeck = "select max(id) from reservation";
+   $statementCheck = $database->query($queryCkeck);
+   $tuple = $statementCheck->fetch();
+   $id = $tuple['0'];
+   $id++;
+   
+   $query = "insert into reservation values (:id, :trajet_id :passager_id)";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'id' => $id,
+     'trajet_id' => $trajet_id,
+     'passager_id' => $passager_id
+   ]);
+   return $id;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return -1;
+  }
+ }
 
 
 }

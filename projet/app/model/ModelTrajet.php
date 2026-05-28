@@ -109,5 +109,19 @@ class ModelTrajet {
    return NULL;
   }
  }
+ 
+ public static function getAllTrajetsActif() {
+  try {
+   $database = Model::getInstance();
+   $query = "select t.*, v1.nom as depart, v2.nom as destination from trajet t, ville v1, ville v2 where statut = 'actif' and t.ville_depart = v1.id and t.ville_arrivee = v2.id";
+   $statement = $database->prepare($query);
+   $statement->execute();
+   $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
 }
 ?>
