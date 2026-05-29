@@ -164,12 +164,19 @@ class ModelTrajet {
  public static function insertTrajets($driver_id, $vehicule, $ville_depart, $ville_arrivee, $date_trajet, $heure_trajet, $prix_trajet){
   try {
    $database = Model::getInstance();
-   $query = "insert into trajet (ville_depart, ville_arrivee, conducteur_id, vehicule_id, prix, date_depart, heure_depart, statut) 
-                  values (:ville_depart, :ville_arrivee, :driver_id, :vehicule, :prix_trajet, :date_trajet, :heure_trajet, 'actif')";
+   $queryCkeck = "select max(id) from trajet";
+   $statementCheck = $database->query($queryCkeck);
+   $tuple = $statementCheck->fetch();
+   $id = $tuple['0'];
+   $id++;
+   
+   $query = "insert into trajet (id ,ville_depart, ville_arrivee, conducteur_id, vehicule_id, prix, date_depart, heure_depart, statut) 
+                  values (:id, :ville_depart, :ville_arrivee, :driver_id, :vehicule, :prix_trajet, :date_trajet, :heure_trajet, 'actif')";
                   
    $statement = $database->prepare($query);
    $statement->execute([
-     'ville_depart' => $ville_depart,
+    'id' => $id,
+    'ville_depart' => $ville_depart,
     'ville_arrivee' => $ville_arrivee,
     'driver_id' => $driver_id,
     'vehicule' => $vehicule,
@@ -178,7 +185,7 @@ class ModelTrajet {
     'heure_trajet' => $heure_trajet
    ]);
    
-   return $database->lastInsertId();
+   return $id;
         
    } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
