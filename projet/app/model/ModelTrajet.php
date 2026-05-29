@@ -148,12 +148,12 @@ class ModelTrajet {
    $database = Model::getInstance();
    $query = "select t.id, v1.nom as ville_depart, v2.nom as ville_arrivee, t.date_depart, t.heure_depart " 
            . "from trajet t, ville v1, ville v2 " 
-           . "where t.ville_depart = v1.id and t.ville_arrivee = v2.id and t.conducteur_id = :driver_id and t.statut = 'actif' ";
+           . "where t.ville_depart = v1.id and t.ville_arrivee = v2.id and t.conducteur_id = :driver_id and LOWER(t.statut) = 'actif'";
    $statement = $database->prepare($query);
    $statement->execute([
        'driver_id' => $driver_id
    ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelTrajet");
+   $results = $statement->fetchAll(PDO::FETCH_OBJ);
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());

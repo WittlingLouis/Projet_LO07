@@ -24,12 +24,13 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
                 <?php
                 if (!empty($results)) {
                     foreach ($results as $t) {
-                        printf("<option value='%d'>%s vers %s le %s à %s</option>", 
-                            $t['id'], 
-                            $t['ville_depart'], 
-                            $t['ville_arrivee'], 
-                            $t['date_depart'], 
-                            $t['heure_depart']);
+printf("<option value='%d'>%s vers %s le %s à %s</option>", 
+            $t->id, 
+            htmlspecialchars($t->ville_depart), 
+            htmlspecialchars($t->ville_arrivee), 
+            htmlspecialchars($t->date_depart), 
+            htmlspecialchars($t->heure_depart)
+        );
                     }
                 }
                 ?>
