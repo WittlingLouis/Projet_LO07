@@ -66,7 +66,7 @@
                   <li><a class="dropdown-item" href="router2.php?action=trajetCreate">Ajout d'un trajet</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="router2.php?action=trajetReadAllFromOneDriverActif">Liste des passagers de l'un de mes trajets actifs</a></li>
-                  <li><a class="dropdown-item" href="router2.php?action=villeCreate">Cloturer l'un de mes trajets actifs</a></li>
+                  <li><a class="dropdown-item" href="router2.php?action=selectTrajetToCloture">Cloturer l'un de mes trajets actifs</a></li>
               <?php elseif ($_SESSION['role'] == 'passager'): ?>
                   <li><a class="dropdown-item" href="router2.php?action=reservReadAll">Liste des réservations</a></li>
                   <li><a class="dropdown-item" href="router2.php?action=reservCreate">Effectuer une réservation</a></li>

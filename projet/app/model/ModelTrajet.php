@@ -207,5 +207,78 @@ class ModelTrajet {
    return -1;
    }
  }
+ 
+ public static function setTrajetPassif($trajet_id) {
+  try {
+   $database = Model::getInstance();
+   
+   $queryCheckStatut = "select statut from trajet where id = :trajet_id";
+   $statementCheckStatut = $database->prepare($queryCheckStatut);
+   $statementCheckStatut->execute(['trajet_id' => $trajet_id]);
+   $trajetActuel = $statementCheckStatut->fetch(PDO::FETCH_ASSOC);
+  
+   if (!$trajetActuel || $trajetActuel['statut'] === 'passif') {
+       return false; 
+   }
+  
+   $queryTrajet = "update trajet set statut = 'passif' where id = :trajet_id";
+   $statementTrajet = $database->prepare($queryTrajet);
+   $statementTrajet->execute([
+       'trajet_id' => $trajet_id
+   ]);
+   
+   $queryPrix = "select conducteur_id, prix from trajet where id = :trajet_id";
+   $statementPrix = $database->prepare($queryPrix);
+   $statementPrix->execute([
+       'trajet_id' => $trajet_id
+   ]);
+   $trajet = $statementPrix->fetch(PDO::FETCH_ASSOC);
+   $conducteur_id = $trajet['conducteur_id'];
+   $prix = $trajet['prix'];
+   
+   $queryPass = "select passager_id from reservation where trajet_id = :trajet_id";
+   $statementPass = $database->prepare($queryPass);
+   $statementPass->execute([
+       'trajet_id' => $trajet_id
+   ]);
+   $reservations = $statementPass->fetchAll(PDO::FETCH_ASSOC);
+   $nb_reservations = count($reservations);
+   
+   if($nb_reservations > 0){
+       $somme_win = $prix * $nb_reservations;
+       
+       $querySolde = "update utilisateur set solde = solde + :somme_win where id = :conducteur_id";
+       $statementSolde = $database->prepare($querySolde);
+       $statementSolde->execute([
+           'somme_win' => $somme_win,
+           'conducteur_id' => $conducteur_id
+       ]);
+       
+       $queryDebit = "update utilisateur set solde = solde - :prix where id = :passager_id";
+       $statementDebit = $database->prepare($queryDebit);
+       
+       foreach ($reservations as $res){
+        $statementDebit->execute([
+            'prix' => $prix,
+            'passager_id' => $res['passager_id']
+        ]);
+       }
+   }
+   
+   if ($conducteur_id == $_SESSION['login_id']) {
+      $querySession = "select solde from utilisateur where id = :id";
+      $statementSession = $database->prepare($querySession);
+      $statementSession->execute(['id' => $conducteur_id]);
+      $user = $statementSession->fetch(PDO::FETCH_ASSOC);
+      
+      $_SESSION['solde'] = $user['solde'];
+  }
+   return true;
+      
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
 }
 ?>

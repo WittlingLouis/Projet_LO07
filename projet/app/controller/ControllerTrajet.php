@@ -64,4 +64,26 @@ class ControllerTrajet {
   $vue = $root . '/app/view/trajet/viewInserted.php';
   require ($vue);
  } 
+ 
+ public static function selectTrajetToCloture() {
+    $driver_id = $_SESSION['login_id'];
+    $results = ModelTrajet::getAllTrajetsFromOneDriverActif($driver_id);
+    
+    include 'config.php';
+    $vue = $root . '/app/view/trajet/viewAllTrajetToCloture.php';
+    if (DEBUG)
+    echo ("ControllerTrajet : selectTrajetToCloture : vue = $vue");
+    require ($vue);
+ }
+ 
+ public static function trajetToCloture() {
+    $trajet_id = htmlspecialchars($_GET['trajet_id']);
+    $results = ModelTrajet::setTrajetPassif($trajet_id);
+    
+    include 'config.php';
+    $vue = $root . '/app/view/trajet/viewClotureTrajet.php';
+    if (DEBUG)
+    echo ("ControllerTrajet : trajetToCloture : vue = $vue");
+    require ($vue);
+ }
 }

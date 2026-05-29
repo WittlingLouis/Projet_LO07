@@ -59,6 +59,8 @@ switch ($action) {
     case "trajetCreated" :  
     case "trajetReadAllFromOneDriverActif" :
     case "trajetReadListPassagers" :
+    case "selectTrajetToCloture" :
+    case "trajetToCloture" :
         ControllerTrajet::$action();
         break;
     
