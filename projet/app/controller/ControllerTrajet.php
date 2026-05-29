@@ -28,6 +28,17 @@ class ControllerTrajet {
   require ($vue);
  }
  
+ public static function trajetReadListPassagers() {
+    $trajet_id = htmlspecialchars($_GET['trajet_id']);
+    $passagers = ModelTrajet::getTrajetsListPassagers($trajet_id);
+    
+    include 'config.php';
+    $vue = $root . '/app/view/trajet/viewListPassagers.php';
+    if (DEBUG)
+    echo ("ControllerTrajet : trajetReadListPassagers : vue = $vue");
+    require ($vue);
+}
+ 
  public static function trajetCreate() {
   $driver_id = $_SESSION['login_id'];
   $vehicule = ModelVehicule::getAllVehiculesFromOneDriver($driver_id);

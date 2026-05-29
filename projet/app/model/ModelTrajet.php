@@ -161,6 +161,21 @@ class ModelTrajet {
   }
  }
  
+ public static function getTrajetsListPassagers($trajet_id) {
+    try {
+        $database = Model::getInstance();
+        $query = "SELECT u.nom, u.prenom "
+               . "FROM reservation r, utilisateur u "
+               . "WHERE r.trajet_id = :trajet_id and r.passager_id = u.id";
+        $statement = $database->prepare($query);
+        $statement->execute(['trajet_id' => $trajet_id]);
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
+ 
  public static function insertTrajets($driver_id, $vehicule, $ville_depart, $ville_arrivee, $date_trajet, $heure_trajet, $prix_trajet){
   try {
    $database = Model::getInstance();
