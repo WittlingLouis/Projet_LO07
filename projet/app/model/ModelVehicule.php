@@ -114,7 +114,7 @@ class ModelVehicule {
   public static function getAllVehiculesFromOneDriver($driver_id) {
   try {
    $database = Model::getInstance();
-   $query = "select marque, modele, annee, immatriculation from vehicule where proprietaire_id = :driver_id";
+   $query = "select id, marque, modele, annee, immatriculation from vehicule where proprietaire_id = :driver_id";
    $statement = $database->prepare($query);
    $statement->execute([
      'driver_id' => $driver_id,

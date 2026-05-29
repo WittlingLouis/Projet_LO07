@@ -24,16 +24,25 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
       </thead>
       <tbody>
           <?php
-            foreach ($results as $element) {
-                printf(
-                    "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", 
-                    $element['ville_depart'], 
-                    $element['ville_arrivee'], 
-                    $element['date_depart'], 
-                    $element['heure_depart'],
-                    $element['statut']
-                );
-            }
+          if (!empty($results)) {
+              foreach ($results as $element) {
+                  printf("<tr>");
+                  printf("<td>%s</td>", htmlspecialchars($element->getVille_depart()));
+                  printf("<td>%s</td>", htmlspecialchars($element->getVille_arrivee()));
+                  
+                  $dateFormatee = date('d/m/Y', strtotime($element->getDate_depart()));
+                  printf("<td>%s</td>", $dateFormatee);
+                  
+                  $heureFormatee = date('H\hi', strtotime($element->getHeure_depart()));
+                  printf("<td>%s</td>", $heureFormatee);
+                  
+                  printf("<td>%s</td>", htmlspecialchars($element->getStatut()));
+                  
+                  printf("</tr>");
+              }
+          } else {
+              echo "<tr><td colspan='6' class='text-center'><strong>Vous n'avez créé aucun trajet pour le moment.</strong></td></tr>";
+          }
             ?>
         </tbody>
     </table>

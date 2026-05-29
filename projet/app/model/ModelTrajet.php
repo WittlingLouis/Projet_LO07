@@ -127,7 +127,10 @@ class ModelTrajet {
   public static function getAllTrajetsFromOneDriver($driver_id) {
   try {
    $database = Model::getInstance();
-   $query = "select id, ville_depart, ville_arrivee, date_depart, heure_depart, statut from trajet where id = :driver_id";
+   $query = "select t.id, v1.nom as ville_depart, v2.nom as ville_arrivee, t.date_depart, t.heure_depart, t.statut " 
+           . "from trajet t, ville v1, ville v2 " 
+           . "where t.ville_depart = v1.id and t.ville_arrivee = v2.id and conducteur_id = :driver_id " 
+           . "order by t.date_depart desc, t.heure_depart desc";
    $statement = $database->prepare($query);
    $statement->execute([
        'driver_id' => $driver_id
@@ -138,6 +141,49 @@ class ModelTrajet {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
   }
+ }
+ 
+  public static function getAllTrajetsFromOneDriverActif($driver_id) {
+  try {
+   $database = Model::getInstance();
+   $query = "select t.id, v1.nom as ville_depart, v2.nom as ville_arrivee, t.date_depart, t.heure_depart " 
+           . "from trajet t, ville v1, ville v2 " 
+           . "where t.ville_depart = v1.id and t.ville_arrivee = v2.id and conducteur_id = :driver_id and LOWER(t.statut) = 'actif'";
+   $statement = $database->prepare($query);
+   $statement->execute([
+       'driver_id' => $driver_id
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelTrajet");
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
+ public static function insertTrajets($driver_id, $vehicule, $ville_depart, $ville_arrivee, $date_trajet, $heure_trajet, $prix_trajet){
+  try {
+   $database = Model::getInstance();
+   $query = "insert into trajet (ville_depart, ville_arrivee, conducteur_id, vehicule_id, prix, date_depart, heure_depart, statut) 
+                  values (:ville_depart, :ville_arrivee, :driver_id, :vehicule, :prix_trajet, :date_trajet, :heure_trajet, 'actif')";
+                  
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'ville_depart' => $ville_depart,
+    'ville_arrivee' => $ville_arrivee,
+    'driver_id' => $driver_id,
+    'vehicule' => $vehicule,
+    'prix_trajet' => $prix_trajet,
+    'date_trajet' => $date_trajet,
+    'heure_trajet' => $heure_trajet
+   ]);
+   
+   return $database->lastInsertId();
+        
+   } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return -1;
+   }
  }
 }
 ?>

@@ -56,7 +56,8 @@ switch ($action) {
 
     case "trajetReadAllFromOneDriver" :
     case "trajetCreate" :
-    case "trajetCreated" :    
+    case "trajetCreated" :  
+    case "trajetReadAllFromOneDriverActif" :
         ControllerTrajet::$action();
         break;
     

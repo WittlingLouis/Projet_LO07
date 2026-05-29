@@ -14,22 +14,51 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
 
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">  
-        <label class="w-25" for="ville_depart">Ville de départ</label>
-        <input type="text" class="form-control" id="ville_depart" name="ville_depart" placeholder="Ex: Troyes">
-        <br/>
+          
+        <input type="hidden" name='action' value='trajetCreated'>   
         
-        <label class="w-25" for="ville_arrivee">Ville d'arrivée</label>
-        <input type="text" class="form-control" id="ville_arrivee" name="ville_arrivee" placeholder="Ex: La Rochelle">
-        <br/>
-        
-        <input type="hidden" name='action' value='trajetCreated'>        
-        <label class='w-25' for="id">Sélectionnez un véhicule : </label><select class="form-control" id='trajet_id' name='trajet_id' style="width: 500px">
+        <label class='w-25' for="ville_depart">Sélectionnez la ville de départ</label>
+        <select class="form-control" id='ville_depart' name='ville_depart' style="width: 500px">
             <?php
-            foreach ($trajet as $t) {
-                $id     = $t->getId(); 
-                $marque = $t->getMarque();
-                $modele = $t->getModele();
-                $immat  = $t->getImmatriculation();
+            foreach ($villes as $v) {
+                $id = $v->getId();
+                $nom = $v->getNom(); 
+
+                printf(
+                    "<option value='%d'>%s</option>",
+                    $id,
+                    htmlspecialchars($nom) 
+                );
+            }
+            ?>
+        </select>
+        <br>
+           
+        <label class='w-25' for="ville_arrivee">Sélectionnez la ville de départ</label>
+        <select class="form-control" id='ville_arrivee' name='ville_arrivee' style="width: 500px">
+            <?php
+            foreach ($villes as $v) {
+                $id = $v->getId();
+                $nom = $v->getNom(); 
+
+                printf(
+                    "<option value='%d'>%s</option>",
+                    $id,
+                    htmlspecialchars($nom) 
+                );
+            }
+            ?>
+        </select>
+        <br>
+             
+        <label class='w-25' for="id">Sélectionnez un véhicule : </label>
+        <select class="form-control" id='vehicule' name='vehicule' style="width: 500px">
+            <?php
+            foreach ($vehicule as $v) {
+                $id = $v->getId(); 
+                $marque = $v->getMarque();
+                $modele = $v->getModele();
+                $immat = $v->getImmatriculation();
 
                 printf(
                     "<option value='%d'>%s %s (%s)</option>", 
