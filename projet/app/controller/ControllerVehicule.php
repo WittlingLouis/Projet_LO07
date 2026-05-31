@@ -4,34 +4,25 @@
 
 require_once '../model/ModelVehicule.php';
 require_once '../model/ModelUtilisateur.php';
+require_once 'BaseController.php';
 
 
-class ControllerVehicule {
+class ControllerVehicule extends BaseController {
  
  public static function vehiculeReadAll() {
   $results = ModelVehicule::getAllVehicules();
-  include 'config.php';
-  $vue = $root . '/app/view/vehicule/viewAll.php';
-  if (DEBUG)
-   echo ("ControllerVehicule : vehiculeReadAll : vue = $vue");
-  require ($vue);
+  self::render('vehicule/viewAll', ['results' => $results]);
  }
  
   public static function vehiculeReadAllFromOneDriver() {
   $driver_id = $_SESSION['login_id'];
   $results = ModelVehicule::getAllVehiculesFromOneDriver($driver_id);
-  include 'config.php';
-  $vue = $root . '/app/view/vehicule/viewAllFromOneDriver.php';
-  if (DEBUG)
-   echo ("ControllerVehicule : vehiculeReadAllFromOneDriver : vue = $vue");
-  require ($vue);
+  self::render('vehicule/viewAllFromOneDriver', ['driver_id' => $driver_id, 'results' => $results]);
  }
  
  public static function vehiculeCreate() {
   $listeConducteurs = ModelUtilisateur::getAllConducteurs();
-  include 'config.php';
-  $vue = $root . '/app/view/vehicule/viewInsert.php';
-  require ($vue);
+  self::render('vehicule/viewInsert', ['listeConducteurs' => $listeConducteurs]);
  }
 
  public static function vehiculeCreated() {
@@ -42,9 +33,7 @@ class ControllerVehicule {
       htmlspecialchars($_GET['immatriculation']),
       htmlspecialchars($_GET['proprietaire_id'])
   );
-  include 'config.php';
-  $vue = $root . '/app/view/vehicule/viewInserted.php';
-  require ($vue);
+  self::render('vehicule/viewInserted', ['results' => $results]);
  }
 }
 ?>

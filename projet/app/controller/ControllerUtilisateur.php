@@ -48,9 +48,7 @@ class ControllerUtilisateur extends BaseController {
  }
  
  public static function conducteurCreate() {
-  include 'config.php';
-  $vue = $root . '/app/view/utilisateur/viewInsertConducteur.php';
-  require ($vue);
+  self::render('utilisateur/viewInsertConducteur');
  }
 
  public static function conducteurCreated() {
@@ -59,15 +57,11 @@ class ControllerUtilisateur extends BaseController {
       htmlspecialchars($_GET['prenom']),
       htmlspecialchars($_GET['solde'])
   );
-  include 'config.php';
-  $vue = $root . '/app/view/utilisateur/viewInsertedConducteur.php';
-  require ($vue);
+  self::render('utilisateur/viewInsertedConducteur', ['results' => $results]);
  }
  
  public static function passagerCreate() {
-  include 'config.php';
-  $vue = $root . '/app/view/utilisateur/viewInsertPassager.php';
-  require ($vue);
+  self::render('utilisateur/viewInsertPassager');
  }
 
  public static function passagerCreated() {
@@ -76,9 +70,7 @@ class ControllerUtilisateur extends BaseController {
       htmlspecialchars($_GET['prenom']),
       htmlspecialchars($_GET['solde'])
   );
-  include 'config.php';
-  $vue = $root . '/app/view/utilisateur/viewInsertedPassager.php';
-  require ($vue);
+  self::render('utilisateur/viewInsertedPassager', ['results' => $results]);
  }
 }
 ?>

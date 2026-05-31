@@ -4,26 +4,21 @@
 
 require_once '../model/ModelTrajet.php';
 require_once '../model/ModelReservation.php';
+require_once 'BaseController.php';
 
 
-class ControllerReservation {
+class ControllerReservation extends BaseController {
 
  public static function reservReadAll() {
   $passager_id = $_SESSION['login_id'];
-  ModelTrajet::getAllTrajets();
+  $trajets = ModelTrajet::getAllTrajets();
   $results = ModelReservation::getAllReservFromOnePassager($passager_id);
-  include 'config.php';
-  $vue = $root . '/app/view/reservation/viewAllReserv.php';
-  if (DEBUG)
-   echo ("ControllerReservation : reservReadAll : vue = $vue");
-  require ($vue);
+  self::render('reservation/viewAllReserv', ['passager_id' => $passager_id, 'trajets' => $trajets, 'results' => $results]);
  }
  
  public static function reservCreate() {
   $trajet = ModelTrajet::getAllTrajetsActif();
-  include 'config.php';
-  $vue = $root . '/app/view/reservation/viewInsert.php';
-  require ($vue);
+  self::render('reservation/viewInsert', ['trajet' => $trajet]);
  }
 
  public static function reservCreated() {
@@ -31,22 +26,16 @@ class ControllerReservation {
   $results = ModelReservation::insert(
       htmlspecialchars($_GET['trajet_id']), htmlspecialchars($passager_id)
   );
-  include 'config.php';
-  $vue = $root . '/app/view/reservation/viewInserted.php';
-  require ($vue);
+  self::render('reservation/viewInserted', ['passager_id' => $passager_id, 'results' => $results]);
  }
  
  public static function tenReservCreate() {
-  include 'config.php';
-  $vue = $root . '/app/view/reservation/viewInsertRand.php';
-  require ($vue);
+  self::render('reservation/viewInsertRand');
  }
 
  public static function tenReservCreated() {
   $results = ModelReservation::insertTenRandomReserv();
-  include 'config.php';
-  $vue = $root . '/app/view/reservation/viewInsertedRand.php';
-  require ($vue);
+  self::render('reservation/viewInsertedRand', ['results' => $results]);
  }
 }
 ?>

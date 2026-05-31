@@ -2,22 +2,16 @@
 <!-- ----- debut ControllerProducteur -->
 <?php
 
-class ControllerCovoit {
+require_once 'BaseController.php';
+
+class ControllerCovoit extends BaseController {
  
  public static function covoitAccueil() {
-  include 'config.php';
-  $vue = $root . '/app/view/viewCovoitAccueil.php';
-  if (DEBUG)
-   echo ("ControllerCovoit : covoitAccueil : vue = $vue");
-  require ($vue);
+  self::render('viewCovoitAccueil');
  }
 
  public static function superGlobales() {
-  include 'config.php';
-  $vue = $root . '/app/view/viewSuperGlobales.php';
-  if (DEBUG)
-   echo ("ControllerCovoit : superGlobales : vue = $vue");
-  require ($vue);
+  self::render('viewSuperGlobales');
  }
  
 }

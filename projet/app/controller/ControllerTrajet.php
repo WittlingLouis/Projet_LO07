@@ -5,47 +5,34 @@
 require_once '../model/ModelTrajet.php';
 require_once '../model/ModelVehicule.php';
 require_once '../model/ModelVille.php';
+require_once 'BaseController.php';
 
-class ControllerTrajet {
+class ControllerTrajet extends BaseController {
 
  public static function trajetReadAllFromOneDriver() {
   $driver_id = $_SESSION['login_id'];
   $results = ModelTrajet::getAllTrajetsFromOneDriver($driver_id);
-  include 'config.php';
-  $vue = $root . '/app/view/trajet/viewAllFromOneDriver.php';
-  if (DEBUG)
-   echo ("ControllerTrajet : trajetReadAllFromOneDriver : vue = $vue");
-  require ($vue);
+  self::render('trajet/viewAllFromOneDriver', ['driver_id' => $driver_id, 'results' => $results]);
  }
  
   public static function trajetReadAllFromOneDriverActif() {
   $driver_id = $_SESSION['login_id'];
   $results = ModelTrajet::getAllTrajetsFromOneDriverActif($driver_id);
-  include 'config.php';
-  $vue = $root . '/app/view/trajet/viewAllFromOneDriverActif.php';
-  if (DEBUG)
-   echo ("ControllerTrajet : trajetReadAllFromOneDriverActif : vue = $vue");
-  require ($vue);
+  self::render('trajet/viewAllFromOneDriverActif', ['driver_id' => $driver_id, 'results' => $results]);
  }
  
  public static function trajetReadListPassagers() {
     $trajet_id = htmlspecialchars($_GET['trajet_id']);
     $passagers = ModelTrajet::getTrajetsListPassagers($trajet_id);
     
-    include 'config.php';
-    $vue = $root . '/app/view/trajet/viewListPassagers.php';
-    if (DEBUG)
-    echo ("ControllerTrajet : trajetReadListPassagers : vue = $vue");
-    require ($vue);
+    self::render('trajet/viewListPassagers', ['trajet_id' => $trajet_id, 'passagers' => $passagers]);
 }
  
  public static function trajetCreate() {
   $driver_id = $_SESSION['login_id'];
   $vehicule = ModelVehicule::getAllVehiculesFromOneDriver($driver_id);
   $villes = ModelVille::getAllVilles();
-  include 'config.php';
-  $vue = $root . '/app/view/trajet/viewInsert.php';
-  require ($vue);
+  self::render('trajet/viewInsert', ['driver_id' => $driver_id, 'vehicule' => $vehicule, 'villes' => $villes]);
  }
 
  public static function trajetCreated() {
@@ -59,31 +46,29 @@ class ControllerTrajet {
   $prix_trajet = htmlspecialchars($_GET['prix_trajet']);
  
   $results = ModelTrajet::insertTrajets($driver_id, $vehicule, $ville_depart, $ville_arrivee, $date_trajet, $heure_trajet, $prix_trajet);
-
-  include 'config.php';
-  $vue = $root . '/app/view/trajet/viewInserted.php';
-  require ($vue);
+  self::render('trajet/viewInserted', [
+   'results' => $results, 
+   'driver_id' => $driver_id, 
+   'vehicule' => $vehicule, 
+   'ville_depart' => $ville_depart, 
+   'ville_arrivee' => $ville_arrivee, 
+   'date_trajet' => $date_trajet, 
+   'heure_trajet' => $heure_trajet, 
+   'prix_trajet' => $prix_trajet
+   ]);
  } 
  
  public static function selectTrajetToCloture() {
     $driver_id = $_SESSION['login_id'];
     $results = ModelTrajet::getAllTrajetsFromOneDriverActif($driver_id);
-    
-    include 'config.php';
-    $vue = $root . '/app/view/trajet/viewAllTrajetToCloture.php';
-    if (DEBUG)
-    echo ("ControllerTrajet : selectTrajetToCloture : vue = $vue");
-    require ($vue);
+
+    self::render('trajet/viewAllTrajetToCloture', ['driver_id' => $driver_id, 'results' => $results]);
  }
  
  public static function trajetToCloture() {
     $trajet_id = htmlspecialchars($_GET['trajet_id']);
     $results = ModelTrajet::setTrajetPassif($trajet_id);
     
-    include 'config.php';
-    $vue = $root . '/app/view/trajet/viewClotureTrajet.php';
-    if (DEBUG)
-    echo ("ControllerTrajet : trajetToCloture : vue = $vue");
-    require ($vue);
+    self::render('trajet/viewClotureTrajet', ['trajet_id' => $trajet_id, 'results' => $results]);
  }
 }
