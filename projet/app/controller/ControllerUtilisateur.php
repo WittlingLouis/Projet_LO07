@@ -4,9 +4,9 @@
 
 require_once '../model/ModelUtilisateur.php';
 require_once 'ControllerCovoit.php';
+require_once 'BaseController.php';
 
-
-class ControllerUtilisateur {
+class ControllerUtilisateur extends BaseController {
  
  public static function login() {
   if (isset($_POST['login']) && isset($_POST['password'])){
@@ -44,11 +44,7 @@ class ControllerUtilisateur {
 
  public static function userReadAll() {
   $results = ModelUtilisateur::getAllUsers();
-  include 'config.php';
-  $vue = $root . '/app/view/utilisateur/viewAll.php';
-  if (DEBUG)
-   echo ("ControllerUtilisateurr : userReadAll : vue = $vue");
-  require ($vue);
+  self::render('utilisateur/viewAll', ['results' => $results]);
  }
  
  public static function conducteurCreate() {
