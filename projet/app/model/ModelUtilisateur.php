@@ -204,6 +204,35 @@ class ModelUtilisateur {
    return -1;
   }
  }
+ 
+  public static function insertUser($nom, $prenom, $solde, $statut) {
+  try {
+   $database = Model::getInstance();
+
+   $query = "select max(id) from utilisateur";
+   $statement = $database->query($query);
+   $tuple = $statement->fetch();
+   $id = $tuple['0'];
+   $id++;
+
+   $query = "insert into utilisateur values (:id, :nom, :prenom, :role, :login, :password, :solde)";
+   $statement = $database->prepare($query);
+   $login = str_replace(' ', '', strtolower($prenom . $nom));
+   $statement->execute([
+     'id' => $id,
+     'nom' => $nom,
+     'prenom' => $prenom,
+     'role' => $statut,
+     'login' => $login,
+     'password' => "secret",
+     'solde' => $solde
+   ]);
+   return $id;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return -1;
+  }
+ }
 
 
 }

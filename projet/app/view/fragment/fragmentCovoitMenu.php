@@ -19,8 +19,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router2.php?action=innovation1">Innovation 1</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=innovation2">Innovation 2</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=innovData">Innovation Data</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=innovMVC">Innovation MVC</a></li>
           </ul>
         </li>
 
@@ -39,6 +39,7 @@
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Se connecter</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="router2.php?action=login">Connexion</a></li>
+              <li><a class="dropdown-item" href="router2.php?action=userCreate">S'inscrire</a></li>
             </ul>
           </li>
         

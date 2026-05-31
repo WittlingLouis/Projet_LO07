@@ -14,6 +14,14 @@ class ControllerCovoit extends BaseController {
   self::render('viewSuperGlobales');
  }
  
+ public static function innovData() {
+  self::render('viewInnovationData');
+ }
+ 
+ public static function innovMVC() {
+  self::render('viewInnovationMVC');
+ }
+ 
 }
 ?>
 <!-- ----- fin ControllerProducteur -->

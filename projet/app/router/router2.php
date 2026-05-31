@@ -26,6 +26,8 @@ switch ($action) {
     case "conducteurCreated" :
     case "passagerCreate" :
     case "passagerCreated" :    
+    case "userCreate" :
+    case "userCreated" :  
         ControllerUtilisateur::$action();
         break;
     
@@ -43,6 +45,8 @@ switch ($action) {
         break;
     
     case "superGlobales" :
+    case "innovData" :
+    case "innovMVC" :
         ControllerCovoit::$action();
         break;
     

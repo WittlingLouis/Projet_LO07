@@ -72,6 +72,20 @@ class ControllerUtilisateur extends BaseController {
   );
   self::render('utilisateur/viewInsertedPassager', ['results' => $results]);
  }
+ 
+  public static function userCreate() {
+  self::render('utilisateur/viewInsertUser');
+ }
+ 
+  public static function userCreated() {
+  $results = ModelUtilisateur::insertUser(
+      htmlspecialchars($_GET['nom']),
+      htmlspecialchars($_GET['prenom']),
+      htmlspecialchars($_GET['solde']),
+      htmlspecialchars($_GET['statut'])
+  );
+  self::render('utilisateur/viewInsertedUser', ['results' => $results]);
+ }
 }
 ?>
 <!-- ----- fin ControllerProducteur -->
