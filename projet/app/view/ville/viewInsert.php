@@ -15,7 +15,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
                 <label class='w-25' for="id">Nom de la ville : </label><br><input class="form-control" type="text" name='nom' size='75' value='Troyes'> <br/>                                  
             </div>
             <p/>
-            <button class="btn btn-success" type="submit">Go</button>
+            <button class="btn btn-success" type="submit">Insérer une ville</button>
         </form>
         <p/>
     </div>

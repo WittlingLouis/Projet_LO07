@@ -17,7 +17,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
                 <label class='w-25' for="id">Solde : </label><br><input class="form-control" type="text" name='solde' size='75' value='100.0'> <br/> 
             </div>
             <p/>
-            <button class="btn btn-success" type="submit">Go</button>
+            <button class="btn btn-success" type="submit">Insérer le conducteur</button>
         </form>
         <p/>
     </div>

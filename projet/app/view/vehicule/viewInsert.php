@@ -26,7 +26,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
             </div>
             <p/>
             <br/> 
-            <button class="btn btn-success" type="submit">Go</button>
+            <button class="btn btn-success" type="submit">Insérer le véhicule</button>
         </form>
         <p/>
     </div>

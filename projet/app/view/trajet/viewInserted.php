@@ -11,7 +11,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
 
         <?php
         if ($results) {
-            echo ("<h3>Le nouveau trajet a été ajouté </h3>");
+            echo ("<h3 class='text-success'>Le nouveau trajet a été ajouté </h3>");
             echo("<ul>");
             echo ("<li>id = " . $results . "</li>");
             echo ("<li>vehicule = " . $_GET['vehicule'] . "</li>");
@@ -22,7 +22,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
             echo ("<li>prix du trajet = " . $_GET['prix_trajet'] . "</li>");
             echo("</ul>");
         } else {
-            echo ("<h3>Problème d'insertion du trajet</h3>");
+            echo ("<h3 class='text-success'>Problème d'insertion du trajet</h3>");
             echo ("Informations du trajet = " . $_GET['vehicule'] . $_GET['ville_depart'] . $_GET['ville_arrivee'] . $_GET['date_trajet'] . $_GET['heure_trajet'] . $_GET['prix_trajet']);
         }
 

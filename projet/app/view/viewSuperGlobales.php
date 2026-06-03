@@ -21,7 +21,7 @@
 
                 echo("<div class='card'>");
                 echo("<div class='card-body bg-warning-subtle'>");
-                echo("<h5 class='card-title'>SuperGlobale : $label</h5>");
+                echo("<h5 class='card-title text-success'>SuperGlobale : $label</h5>");
 
                 echo("<div class = 'col-4'>");
                 echo("<table class = 'table table-bordered'>");

@@ -11,7 +11,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
 
         <?php
         if ($results) {
-            echo ("<h3>Le nouveau véhicule a été ajouté </h3>");
+            echo ("<h3 class='text-success'>Le nouveau véhicule a été ajouté </h3>");
             echo("<ul>");
             echo ("<li>id = " . $results . "</li>");
             echo ("<li>marque = " . $_GET['marque'] . "</li>");
@@ -21,7 +21,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
             echo ("<li>id du propriétaire = " . $_GET['proprietaire_id'] . "</li>");
             echo("</ul>");
         } else {
-            echo ("<h3>Problème d'insertion du véhicule</h3>");
+            echo ("<h3 class='text-success'>Problème d'insertion du véhicule</h3>");
             echo ("Informations du véhicule = " . $_GET['marque'] . $_GET['modele'] . $_GET['immatriculation']);
         }
 

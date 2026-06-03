@@ -30,7 +30,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
                     ?>
                 </select>
             </div><br>
-            <button class="btn btn-success" type="submit">Go</button>
+            <button class="btn btn-success" type="submit">Cloturer le trajet</button>
         </form>
     </div>
     <?php include $root . '/app/view/fragment/fragmentCovoitFooter.html'; ?>
