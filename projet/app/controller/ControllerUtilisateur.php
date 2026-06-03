@@ -1,5 +1,3 @@
-
-<!-- ----- debut ControllerProducteur -->
 <?php
 
 require_once '../model/ModelUtilisateur.php';
@@ -7,85 +5,85 @@ require_once 'ControllerCovoit.php';
 require_once 'BaseController.php';
 
 class ControllerUtilisateur extends BaseController {
- 
- public static function login() {
-  if (isset($_POST['login']) && isset($_POST['password'])){
-      $login = $_POST['login'];
-      $password = $_POST['password'];
-      
-      $results = ModelUtilisateur::login($login, $password);
-      
-      if (count($results) > 0){
-          $user = $results[0];
-          $_SESSION['login_id'] = $user->getId();
-          $_SESSION['nom'] = $user->getNom();
-          $_SESSION['prenom'] = $user->getPrenom();
-          $_SESSION['role'] = $user->getRole();
-          $_SESSION['solde'] = $user->getSolde();
-          
-          ControllerCovoit::covoitAccueil();
-      } else {
-          include 'config.php';
-          $vue = $root . '/app/view/utilisateur/login.php';
-          require ($vue);
-      }
-  } else {
-      include 'config.php';
-      $vue = $root . '/app/view/utilisateur/login.php';
-      require ($vue);
-  }
- }
- 
- public static function logout() {
-    session_unset();
-    $_SESSION['login_id'] = -1;
-    ControllerCovoit::covoitAccueil();
- }
 
- public static function userReadAll() {
-  $results = ModelUtilisateur::getAllUsers();
-  self::render('utilisateur/viewAll', ['results' => $results]);
- }
- 
- public static function conducteurCreate() {
-  self::render('utilisateur/viewInsertConducteur');
- }
+    public static function login() {
+        if (isset($_POST['login']) && isset($_POST['password'])) {
+            $login = $_POST['login'];
+            $password = $_POST['password'];
 
- public static function conducteurCreated() {
-  $results = ModelUtilisateur::insertConducteur(
-      htmlspecialchars($_GET['nom']),
-      htmlspecialchars($_GET['prenom']),
-      htmlspecialchars($_GET['solde'])
-  );
-  self::render('utilisateur/viewInsertedConducteur', ['results' => $results]);
- }
- 
- public static function passagerCreate() {
-  self::render('utilisateur/viewInsertPassager');
- }
+            $results = ModelUtilisateur::login($login, $password);
 
- public static function passagerCreated() {
-  $results = ModelUtilisateur::insertPassager(
-      htmlspecialchars($_GET['nom']),
-      htmlspecialchars($_GET['prenom']),
-      htmlspecialchars($_GET['solde'])
-  );
-  self::render('utilisateur/viewInsertedPassager', ['results' => $results]);
- }
- 
-  public static function userCreate() {
-  self::render('utilisateur/viewInsertUser');
- }
- 
-  public static function userCreated() {
-  $results = ModelUtilisateur::insertUser(
-      htmlspecialchars($_GET['nom']),
-      htmlspecialchars($_GET['prenom']),
-      htmlspecialchars($_GET['solde']),
-      htmlspecialchars($_GET['statut'])
-  );
-  self::render('utilisateur/viewInsertedUser', ['results' => $results]);
- }
+            if (count($results) > 0) {
+                $user = $results[0];
+                $_SESSION['login_id'] = $user->getId();
+                $_SESSION['nom'] = $user->getNom();
+                $_SESSION['prenom'] = $user->getPrenom();
+                $_SESSION['role'] = $user->getRole();
+                $_SESSION['solde'] = $user->getSolde();
+
+                ControllerCovoit::covoitAccueil();
+            } else {
+                include 'config.php';
+                $vue = $root . '/app/view/utilisateur/login.php';
+                require ($vue);
+            }
+        } else {
+            include 'config.php';
+            $vue = $root . '/app/view/utilisateur/login.php';
+            require ($vue);
+        }
+    }
+
+    public static function logout() {
+        session_unset();
+        $_SESSION['login_id'] = -1;
+        ControllerCovoit::covoitAccueil();
+    }
+
+    public static function userReadAll() {
+        $results = ModelUtilisateur::getAllUsers();
+        self::render('utilisateur/viewAll', ['results' => $results]);
+    }
+
+    public static function conducteurCreate() {
+        self::render('utilisateur/viewInsertConducteur');
+    }
+
+    public static function conducteurCreated() {
+        $results = ModelUtilisateur::insertConducteur(
+                htmlspecialchars($_GET['nom']),
+                htmlspecialchars($_GET['prenom']),
+                htmlspecialchars($_GET['solde'])
+        );
+        self::render('utilisateur/viewInsertedConducteur', ['results' => $results]);
+    }
+
+    public static function passagerCreate() {
+        self::render('utilisateur/viewInsertPassager');
+    }
+
+    public static function passagerCreated() {
+        $results = ModelUtilisateur::insertPassager(
+                htmlspecialchars($_GET['nom']),
+                htmlspecialchars($_GET['prenom']),
+                htmlspecialchars($_GET['solde'])
+        );
+        self::render('utilisateur/viewInsertedPassager', ['results' => $results]);
+    }
+
+    public static function userCreate() {
+        self::render('utilisateur/viewInsertUser');
+    }
+
+    public static function userCreated() {
+        $results = ModelUtilisateur::insertUser(
+                htmlspecialchars($_GET['nom']),
+                htmlspecialchars($_GET['prenom']),
+                htmlspecialchars($_GET['solde']),
+                htmlspecialchars($_GET['statut'])
+        );
+        self::render('utilisateur/viewInsertedUser', ['results' => $results]);
+    }
 }
+
 ?>
-<!-- ----- fin ControllerProducteur -->
