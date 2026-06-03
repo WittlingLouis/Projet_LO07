@@ -13,9 +13,9 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
     <!-- ===================================================== -->
     <?php
     if ($results) {
-     echo ("<h3>Le trajet a été cloturé avec succès</h3><br>");
+     echo ("<h3 class='text-success'>Le trajet a été cloturé avec succès</h3><br>");
     } else {
-     echo ("<h3>Problème de cloture du trajet</h3><br>");
+     echo ("<h3 class='text-success'>Problème de cloture du trajet</h3><br>");
     }
     
     echo("</div>");

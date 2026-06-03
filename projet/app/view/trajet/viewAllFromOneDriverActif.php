@@ -14,12 +14,12 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
       include $root . '/app/view/fragment/fragmentCovoitMenu.php';
       include $root . '/app/view/fragment/fragmentCovoitJumbotron.html';
       ?>
-    <h3>Sélectionner l'un de mes trajet actif</h3>
+    <h3 class="text-success">Sélectionner l'un de mes trajet actif</h3>
     <form role="form" method='get' action='router2.php'>
         <input type="hidden" name='action' value='trajetReadListPassagers'>
         
         <div class="form-group">
-            <label for="trajet_id">Choisissez un trajet ouvert aux réservations :</label>
+            <label for="trajet_id">Choisissez un de vos trajets :</label>
             <select class="form-control" id='trajet_id' name='trajet_id' style="width: 500px">
                 <?php
                 if (!empty($results)) {
@@ -35,8 +35,8 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
                 }
                 ?>
             </select>
-        </div>
-        <button class="btn btn-primary" type="submit">Submit form</button>
+        </div><br>
+        <button class="btn btn-success" type="submit">Go</button>
     </form>
   </div>
   <?php include $root . '/app/view/fragment/fragmentCovoitFooter.html'; ?>

@@ -13,13 +13,13 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
     <!-- ===================================================== -->
     <?php
     if ($results) {
-     echo ("<h3>La réservation a été effectuée </h3>");
+     echo ("<h3 class='text-success'>La réservation a été effectuée </h3>");
      echo("<ul>");
-     echo ("<li>id = " . $results . "</li>");
+     echo ("<li>id du trajet = " . $results . "</li>");
      echo("</ul>");
     } else {
-     echo ("<h3>Problème de réservation</h3>");
-     echo ("id = " . $results);
+     echo ("<h3 class='text-success'>Problème de réservation</h3>");
+     echo ("Informations de la réservation = " . $results);
     }
 
     echo("</div>");

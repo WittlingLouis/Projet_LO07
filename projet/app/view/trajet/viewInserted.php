@@ -24,8 +24,8 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
      echo ("<li>prix du trajet = " . $_GET['prix_trajet'] . "</li>");
      echo("</ul>");
     } else {
-     echo ("<h3>Problème d'insertion du trjet</h3>");
-     echo ("id = " . $_GET['vehicule'] . $_GET['ville_depart'] . $_GET['ville_arrivee'] . $_GET['date_trajet'] . $_GET['heure_trajet'] . $_GET['prix_trajet']);
+     echo ("<h3>Problème d'insertion du trajet</h3>");
+     echo ("Informations du trajet = " . $_GET['vehicule'] . $_GET['ville_depart'] . $_GET['ville_arrivee'] . $_GET['date_trajet'] . $_GET['heure_trajet'] . $_GET['prix_trajet']);
     }
     
     echo("</div>");

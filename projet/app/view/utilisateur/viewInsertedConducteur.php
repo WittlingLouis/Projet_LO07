@@ -22,7 +22,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
      echo("</ul>");
     } else {
      echo ("<h3>Problème d'insertion du conducteur</h3>");
-     echo ("id = " . $_GET['nom'] . $_GET['prenom'] . $_GET['solde']);
+     echo ("Informations du conducteur = " . $_GET['nom'] . $_GET['prenom'] . $_GET['solde']);
     }
 
     echo("</div>");

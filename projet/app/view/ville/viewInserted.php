@@ -20,7 +20,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
      echo("</ul>");
     } else {
      echo ("<h3>Problème d'insertion de la ville</h3>");
-     echo ("id = " . $_GET['nom']);
+     echo ("Informations de la ville = " . $_GET['nom']);
     }
 
     echo("</div>");

@@ -13,7 +13,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
     <!-- ===================================================== -->
     <?php
     if ($results) {
-     echo ("<h3>Les 10 réservation ont été effectuées </h3>");
+     echo ("<h3 class='text-success'>Les 10 réservation ont été effectuées </h3>");
      echo("<ul>");
      foreach($results as $res){
          printf("Nouvelle réservation pour le trajet %s --> %s par %s %s</br>",
@@ -25,7 +25,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
      }
      echo("</ul>");
     } else {
-     echo ("<h3>Problème de réservation</h3>");
+     echo ("<h3 class='text-success'>Problème de réservation</h3>");
      echo ("id = " . $results);
     }
 

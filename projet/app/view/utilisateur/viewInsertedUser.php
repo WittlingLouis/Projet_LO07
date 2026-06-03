@@ -25,8 +25,8 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
      echo ("<li>solde = " . $_GET['solde'] . "</li>");
      echo("</ul>");
     } else {
-     echo ("<h3>Problème d'insertion du conducteur</h3>");
-     echo ("id = " . $_GET['nom'] . $_GET['prenom'] . $_GET['solde'] . $_GET['statut']);
+     echo ("<h3>Problème d'insertion de l'utilisateur</h3>");
+     echo ("Informations de l'utilisateur = " . $_GET['nom'] . $_GET['prenom'] . $_GET['solde'] . $_GET['statut']);
     }
 
     echo("</div>");

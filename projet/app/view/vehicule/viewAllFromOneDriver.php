@@ -10,7 +10,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
       include $root . '/app/view/fragment/fragmentCovoitMenu.php';
       include $root . '/app/view/fragment/fragmentCovoitJumbotron.html';
       ?>
-      <h3 class="text-success">Liste des vehicules</h3>  
+      <h3 class="text-success">Liste de vos vehicules</h3>  
 
     <table class = "table table-striped table-bordered">
       <thead>

@@ -16,15 +16,15 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
      echo ("<h3>Le nouveau véhicule a été ajouté </h3>");
      echo("<ul>");
      echo ("<li>id = " . $results . "</li>");
-     echo ("<li>nom = " . $_GET['marque'] . "</li>");
-     echo ("<li>nom = " . $_GET['modele'] . "</li>");
-     echo ("<li>nom = " . $_GET['annee'] . "</li>");
-     echo ("<li>nom = " . $_GET['immatriculation'] . "</li>");
-     echo ("<li>nom = " . $_GET['proprietaire_id'] . "</li>");
+     echo ("<li>marque = " . $_GET['marque'] . "</li>");
+     echo ("<li>modèle = " . $_GET['modele'] . "</li>");
+     echo ("<li>année = " . $_GET['annee'] . "</li>");
+     echo ("<li>immatriculation = " . $_GET['immatriculation'] . "</li>");
+     echo ("<li>id du propriétaire = " . $_GET['proprietaire_id'] . "</li>");
      echo("</ul>");
     } else {
      echo ("<h3>Problème d'insertion du véhicule</h3>");
-     echo ("id = " . $_GET['marque'] . $_GET['modele'] . $_GET['immatriculation']);
+     echo ("Informations du véhicule = " . $_GET['marque'] . $_GET['modele'] . $_GET['immatriculation']);
     }
 
     echo("</div>");

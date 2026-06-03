@@ -11,6 +11,7 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
       include $root . '/app/view/fragment/fragmentCovoitMenu.php';
       include $root . '/app/view/fragment/fragmentCovoitJumbotron.html';
     ?> 
+    <h3 class="text-success">Réservation d'un trajet</h3>
 
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
