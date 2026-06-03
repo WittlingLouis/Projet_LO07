@@ -3,6 +3,5 @@
 session_start();
 $_SESSION['login_id'] = -1;
 header('Location: app/router/router2.php?action=truc');
-
 ?>
 

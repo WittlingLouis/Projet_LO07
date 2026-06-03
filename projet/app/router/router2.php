@@ -1,4 +1,5 @@
 <?php
+
 require_once('../controller/ControllerCovoit.php');
 require_once('../controller/ControllerUtilisateur.php');
 require_once('../controller/ControllerVille.php');
@@ -16,58 +17,57 @@ if (isset($_REQUEST['action'])) {
 $args = $_REQUEST;
 unset($args['action']);
 
-// 4. Routage
 switch ($action) {
     case "login" :
     case "logout" :
-    case "userReadAll" : 
-    case "getAllConducteurs" :   
+    case "userReadAll" :
+    case "getAllConducteurs" :
     case "conducteurCreate" :
     case "conducteurCreated" :
     case "passagerCreate" :
-    case "passagerCreated" :    
+    case "passagerCreated" :
     case "userCreate" :
-    case "userCreated" :  
+    case "userCreated" :
         ControllerUtilisateur::$action();
         break;
-    
+
     case "villeReadAll" :
     case "villeCreate" :
     case "villeCreated" :
         ControllerVille::$action();
         break;
-    
+
     case "vehiculeReadAll" :
     case "vehiculeReadAllFromOneDriver" :
-    case "vehiculeCreate" : 
-    case "vehiculeCreated" :  
+    case "vehiculeCreate" :
+    case "vehiculeCreated" :
         ControllerVehicule::$action();
         break;
-    
+
     case "superGlobales" :
     case "innovData" :
     case "innovMVC" :
         ControllerCovoit::$action();
         break;
-    
+
     case "reservReadAll" :
     case "reservCreate" :
-    case "reservCreated" :    
+    case "reservCreated" :
     case "tenReservCreate" :
-    case "tenReservCreated" :    
+    case "tenReservCreated" :
         ControllerReservation::$action();
         break;
 
     case "trajetReadAllFromOneDriver" :
     case "trajetCreate" :
-    case "trajetCreated" :  
+    case "trajetCreated" :
     case "trajetReadAllFromOneDriverActif" :
     case "trajetReadListPassagers" :
     case "selectTrajetToCloture" :
     case "trajetToCloture" :
         ControllerTrajet::$action();
         break;
-    
+
     default:
         $action = "covoitAccueil";
         ControllerCovoit::$action();
