@@ -76,13 +76,34 @@ class ControllerUtilisateur extends BaseController {
     }
 
     public static function userCreated() {
-        $results = ModelUtilisateur::insertUser(
+        $statut = htmlspecialchars($_GET['statut']);
+        $id_utilisateur = ModelUtilisateur::insertUser(
                 htmlspecialchars($_GET['nom']),
                 htmlspecialchars($_GET['prenom']),
                 htmlspecialchars($_GET['solde']),
-                htmlspecialchars($_GET['statut'])
+                $statut
         );
-        self::render('utilisateur/viewInsertedUser', ['results' => $results]);
+        
+        if ($statut == 'conducteur'){
+            self::render('utilisateur/viewInsertUserVehicule', ['proprietaire_id' => $id_utilisateur]);
+        } else {
+            self::render('utilisateur/viewInsertedUser', ['results' => $id_utilisateur, 'statut' => $statut]);
+        }
+    }
+
+    public static function userVehiculeCreated() {
+        $results = ModelVehicule::insert(
+                htmlspecialchars($_GET['marque']),
+                htmlspecialchars($_GET['modele']),
+                htmlspecialchars($_GET['annee']),
+                htmlspecialchars($_GET['immatriculation']),
+                htmlspecialchars($_GET['proprietaire_id']) 
+        );
+        
+        self::render('utilisateur/viewInsertedUserVehicule', [
+            'results' => htmlspecialchars($_GET['proprietaire_id']), 
+            'statut' => 'conducteur'
+        ]);
     }
 }
 

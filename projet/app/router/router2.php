@@ -28,6 +28,7 @@ switch ($action) {
     case "passagerCreated" :
     case "userCreate" :
     case "userCreated" :
+    case "userVehiculeCreated" :
         ControllerUtilisateur::$action();
         break;
 

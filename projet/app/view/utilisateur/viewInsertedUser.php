@@ -12,9 +12,9 @@ require ($root . '/app/view/fragment/fragmentCovoitHeader.html');
         <?php
         if ($results) {
             if ($_GET['statut'] == 'conducteur') {
-                echo ("<h3>Le nouveau conducteur a été ajouté </h3>");
+                echo ("<h3 class='text-success'>Le nouveau conducteur a été ajouté </h3>");
             } else {
-                echo ("<h3>Le nouveau passager a été ajouté </h3>");
+                echo ("<h3 class='text-success'>Le nouveau passager a été ajouté </h3>");
             }
             echo("<ul>");
             echo ("<li>id = " . $results . "</li>");
